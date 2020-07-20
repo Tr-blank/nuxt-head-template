@@ -1,2 +1,2 @@
-# nuxt-headTemplate
-nuxt-headTemplate
+# nuxt-head-template
+nuxt-head-template

@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tr-blank/nuxt-headTemplate.git"
+    "url": "git+https://github.com/Tr-blank/nuxt-head-template.git"
   },
   "author": "Tiya",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Tr-blank/nuxt-headTemplate/issues"
+    "url": "https://github.com/Tr-blank/nuxt-head-template/issues"
   },
-  "homepage": "https://github.com/Tr-blank/nuxt-headTemplate#readme"
+  "homepage": "https://github.com/Tr-blank/nuxt-head-template#readme"
 }
