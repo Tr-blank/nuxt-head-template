@@ -1,7 +1,7 @@
 # Nuxt Head Template
 依賴Nuxt的Head模板，模板包含網頁中常用的Meta Tag及Json-ld。
 
-只要在專案中設定完整的網站資訊，便可輸出符合SEO的HTML Head內容。
+只要在專案中設定完整的網站資訊，便可輸出符合SEO的HTML Head內容。
 
 ## 安裝
 ```
@@ -43,7 +43,7 @@ const websiteData = {
   }
 }
 
-// 將 網站資訊 跟Mate基本模板和指定的schema Type模板結合
+// 將 網站資訊 跟Mate基本模板和指定的schema Type模板結合
 const defaultHead = () => {
   return {
     ...defaultMeta(websiteData),
@@ -51,7 +51,7 @@ const defaultHead = () => {
   }
 }
 
-// 將 各個頁面資料 跟Mate頁面模板和指定的schema Type模板結合
+// 將 各個頁面資料 跟Mate頁面模板和指定的schema Type模板結合
 const pageHead = (typeArray, pageData) => {
   const data = {
     ...websiteData,
@@ -89,7 +89,7 @@ import { pageHead } from '~/plugins/head'
 export default {
   head () {
     const headData = {
-      pageType: 'CollectionPage',
+      pageType: 'WebPage',
       title: this.pageTitle,
       webPageUrl: this.routePath
     }
