@@ -1,0 +1,2 @@
+# nuxt-headTemplate
+nuxt-headTemplate
