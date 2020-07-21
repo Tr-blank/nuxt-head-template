@@ -115,7 +115,6 @@
     "name":"{{ title }}",
     "description": "{{ description }}",
     "url": "{{ webPageUrl }}",
-    "logo": "{{ logo }}",
     "image": "{{ imageUrl }}",
     "isPartOf": {
       "@type": "WebSite",

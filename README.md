@@ -179,7 +179,6 @@ export default {
   // 必填
   // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
   'pageType': '網頁類型',
-  'logo': '網站logo網址',
   // 選填
   'copyright': {
     'name': '公司簡稱',

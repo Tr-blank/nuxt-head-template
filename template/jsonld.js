@@ -60,7 +60,6 @@ const WebPage = (data) => {
     '@context': 'http://schema.org',
     '@type': data.pageType,
     'name': data.title,
-    'logo': data.logo,
     'url': data.webPageUrl,
     'image': data.imageUrl,
     'description': data.description,
