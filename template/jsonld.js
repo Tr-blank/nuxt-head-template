@@ -74,7 +74,7 @@ const BreadcrumbList = (data) => {
   return json
 }
 
-const webpage = (data) => {
+const WebPage = (data) => {
   return {
     '@context': 'http://schema.org',
     '@type': data.pageType,
@@ -102,7 +102,7 @@ const templateArray = {
   Brand,
   ContactPoint,
   BreadcrumbList,
-  webpage
+  WebPage
 }
 
 const jsonLd = (typeArray, data) => {
