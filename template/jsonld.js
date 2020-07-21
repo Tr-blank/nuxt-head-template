@@ -25,7 +25,7 @@ const ContactPoint = (data) => {
   if (data.email) { json['email'] = data.email }
   if (data.hoursAvailable) {
     data.hoursAvailable.days.forEach((item) => {
-      json.itemListElement.push({
+      json.hoursAvailable.push({
         '@type': 'OpeningHoursSpecification',
         'opens': data.hoursAvailable.opens,
         'closes': data.hoursAvailable.closes,
