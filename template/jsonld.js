@@ -81,7 +81,7 @@ const WebPage = (data) => {
       json.copyrightHolder['legalName'] = data.copyright.legalName
     }
     if (data.copyright.year) { 
-      json.c['copyrightYear'] = data.copyright.year
+      json['copyrightYear'] = data.copyright.year
     }
   }
   if (data.socialLinks) { json.isPartOf['sameAs'] =  data.socialLinks }
