@@ -1,5 +1,5 @@
 # Nuxt Head Template
-整合常用SEO Meta Tan和Json-ld的Head模板，依賴Nuxt。
+整合常用SEO Meta Tag和Json-ld的Head模板，依賴Nuxt。
 
 ## 安裝
 ```
