@@ -1,20 +1,20 @@
 const defaultMeta = (data) => {
   const json = {
-    title: data.title,
+    title: data.webSiteTitle,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge,chrome=1' },
       { name: 'description', hid: 'description', content: data.description },
       { property: 'og:type', content: 'website' },
-      { property: 'og:title', hid: 'og:title', content: data.title },
+      { property: 'og:title', hid: 'og:title', content: data.webSiteTitle },
       { property: 'og:description', hid: 'og:description', content: data.description },
       { property: 'og:url', hid: 'og:url', content: data.webPageUrl },
-      { property: 'og:site_name', content: data.title },
+      { property: 'og:site_name', content: data.webSiteTitle },
       { property: 'og:image:type', content: 'image/jpeg' },
-      { property: 'og:image', hid: 'og:image', content: data.fbImageUrl },
-      { property: 'og:image:secure_url', hid: 'og:image:secure_url', content: data.fbImageUrl },
-      { property: 'og:image:alt', hid: 'og:image', content: data.title },
+      { property: 'og:image', hid: 'og:image', content: data.imageUrl },
+      { property: 'og:image:secure_url', hid: 'og:image:secure_url', content: data.imageUrl },
+      { property: 'og:image:alt', hid: 'og:image', content: data.webSiteTitle },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
       { name: 'format-detection', content: 'telephone=no,email=no,adress=no' }
@@ -44,8 +44,8 @@ const pageMeta = (data) => {
       { property: 'og:title', hid: 'og:title', content: data.title },
       { property: 'og:description', hid: 'og:description', content: data.description },
       { property: 'og:url', hid: 'og:url', content: data.webPageUrl },
-      { property: 'og:image', hid: 'og:image', content: data.fbImageUrl },
-      { property: 'og:image:secure_url', hid: 'og:image:secure_url', content: data.fbImageUrl },
+      { property: 'og:image', hid: 'og:image', content: data.imageUrl },
+      { property: 'og:image:secure_url', hid: 'og:image:secure_url', content: data.imageUrl },
       { property: 'og:image:alt', hid: 'og:image', content: data.title }
     ]
   }

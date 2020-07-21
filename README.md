@@ -93,16 +93,14 @@ export default {
 ```js
 {
   // SEO必填
-  'title': '網站標題', // 例如：Nuxt Head Template
-  'description': '網站簡介', // 例如：依賴Nuxt的Head模板
-  'webPageUrl': '網站首頁網址',
-  // 當此頁面透過Line或其他通訊軟體分享時，出現的縮圖(尺寸:630x630)
+  'webSiteTitle': '網站標題', // 例如：Nuxt Head Template
+  'webSiteDescription': '網站簡介', // 例如：依賴Nuxt的Head模板
+  'webSiteUrl': '網站首頁網址',
+  // 當此頁面分享到社群平台或通訊軟體時，出現的縮圖(尺寸:1200x630)
   'imageUrl': '網站縮圖網址',
   // 選填
   'locale': '當地語言', // 例如：zh-TW
   'fbAppId': 'Facebook應用程式ID',
-  // 當此頁面分享到FB時，貼文中出現的縮圖(尺寸:1200x630)
-  'fbImageUrl': 'FB分享貼文縮圖網址',
   'copyright': {
     'legalName': '公司正式名稱',
   },
@@ -111,7 +109,7 @@ export default {
 }
 ```
 
-### Mate模板 - 個別頁面資料(將會覆蓋全站相同屬性的資料)
+### Mate模板 - 個別頁面資料
 
 ```js
 {
@@ -121,8 +119,7 @@ export default {
   'webPageUrl': '網頁網址',
   // 選填
   // 有特別行銷需求的網頁可另外指定縮圖，例如：主打商品介紹頁、活動頁...等
-  'imageUrl': '網頁縮圖網址',
-  'fbImageUrl': 'FB分享貼文縮圖網址',
+  'imageUrl': '網頁縮圖網址'
 }
 ```
 
@@ -181,7 +178,8 @@ export default {
 {
   // 必填
   // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
-  'pageType': '網頁類型', 
+  'pageType': '網頁類型',
+  'logo': '網站logo網址',
   // 選填
   'copyright': {
     'name': '公司簡稱',

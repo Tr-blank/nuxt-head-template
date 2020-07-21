@@ -2,10 +2,10 @@ const Brand = (data) => {
   const json = {
     '@context': 'http://schema.org',
     '@type': 'Brand',
-    'name': data.title,
-    'url': data.webPageUrl,
-    'description': data.description,
-    'image': data.fbImageUrl || data.imageUrl,
+    'name': data.webSiteTitle,
+    'url': data.webSiteUrl,
+    'description': data.webSitedescription,
+    'image': data.imageUrl,
   } 
   if (data.logo) { json['logo'] = data.logo }
   if (data.slogan) { json['slogan'] = data.slogan }
@@ -60,14 +60,15 @@ const WebPage = (data) => {
     '@context': 'http://schema.org',
     '@type': data.pageType,
     'name': data.title,
+    'logo': data.logo,
     'url': data.webPageUrl,
-    'image': data.fbImageUrl,
+    'image': data.imageUrl,
     'description': data.description,
     'isPartOf': {
       '@type': 'WebSite',
-      'name': data.title,
-      'url': data.webPageUrl,
-      'description': data.description
+      'name': data.webSiteTitle,
+      'url': data.webSiteUrl,
+      'description': data.webSitedescription,
     }
   }
   if (data.copyright) { 
