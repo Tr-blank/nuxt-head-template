@@ -1,5 +1,5 @@
 # Nuxt Head Template
-整合常用SEO Meta Tan和Json-ld的Head模板，依賴Nuxt。
+整合常用SEO Meta Tan和Json-ld的Head模板，依賴Nuxt。
 
 ## 安裝
 ```
@@ -8,7 +8,7 @@ npm i nuxt-head-template --save
 
 ## 使用方式
 
-1. 在Nuxt專案裡的pluhins目錄新增head.js檔案
+### 1. 在Nuxt專案裡的pluhins目錄新增head.js檔案
 ```js
 // plugins/head.js
 
@@ -48,7 +48,7 @@ module.exports = {
 
 ```
 
-2. 將head object加到Nuxt設定檔裡
+### 2. 將head object加到Nuxt設定檔裡
 ```js
 // nuxt.config.js
 const { defaultHead } = require('./plugins/head')
@@ -59,7 +59,7 @@ module.exports = {
   }
 }
 ```
-3. 在各個Vue頁面中加上head設定
+### 3. 在各個Vue頁面中加上head設定
 ```js
 // pages/index.vue
 import { pageHead } from '~/plugins/head'
@@ -76,14 +76,16 @@ export default {
 }
 ```
 
-## 各網頁類型常用的Schema Type（視資料類型去選擇合適的Type）
+## 網頁常用的Schema Type（視資料類型去選擇合適的Type）
 - 全站共用：Brand、ContactPoint
 - 首頁：WebPage
 - 分類頁、列表頁：CollectionPage、BreadcrumbList
 - 介紹頁、關於頁：AboutPage、BreadcrumbList
 - 商品頁：ItemPage、Product、BreadcrumbList
 
-## 各模板資料格式
+
+
+## 各模板需填寫的資料格式
 
 ### Mate模板 - 全站頁面預設共用資料（必填）
 
@@ -171,7 +173,7 @@ export default {
 ```js
 {
   // 必填
-  'pageType': '網頁類型', // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
+  'pageType': '網頁類型', // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
   // 選填
   'copyright': {
     'name': '公司簡稱',
