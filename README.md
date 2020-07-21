@@ -23,9 +23,10 @@ const websiteData = {
 
 // 將 網站資訊 跟Mate基本模板和指定的schema Type模板結合
 const defaultHead = () => {
+  const typeArray = ['Brand', 'ContactPoint'] // 指定全站共用的json-ld模板
   return {
     ...defaultMeta(websiteData),
-    ...jsonLd(['Brand', 'ContactPoint'], websiteData)
+    ...jsonLd(typeArray, websiteData)
   }
 }
 
@@ -71,12 +72,12 @@ export default {
       title: this.pageTitle,
       webPageUrl: this.routePath
     }
-    return pageHead(['webpage'], headData)
+    return pageHead(['WebPage'], headData) // 指定此頁的json-ld模板
   }
 }
 ```
 
-## 網頁常用的Schema Type（視資料類型去選擇合適的Type）
+## 網頁常用的Schema Type（視資料類型去選擇）
 - 全站共用：Brand、ContactPoint
 - 首頁：WebPage
 - 分類頁、列表頁：CollectionPage、BreadcrumbList
@@ -93,16 +94,20 @@ export default {
 {
   // SEO必填
   'title': '網站標題', // 例如：Nuxt Head Template
-  'description': '網站簡介', // 例如：整合常用SEO Meta Tan和Json-ld的Head模板，依賴Nuxt。
+  'description': '網站簡介', // 例如：依賴Nuxt的Head模板
   'webPageUrl': '網站首頁網址',
-  'imageUrl': '網站縮圖網址', // 當此頁面透過Line或其他通訊軟體分享時，出現的縮圖(尺寸:630x630)
+  // 當此頁面透過Line或其他通訊軟體分享時，出現的縮圖(尺寸:630x630)
+  'imageUrl': '網站縮圖網址',
   // 選填
+  'locale': '當地語言', // 例如：zh-TW
   'fbAppId': 'Facebook應用程式ID',
-  'fbImageUrl': 'FB分享貼文縮圖網址', // 當此頁面分享到FB時，貼文中出現的縮圖(尺寸:1200x630)
+  // 當此頁面分享到FB時，貼文中出現的縮圖(尺寸:1200x630)
+  'fbImageUrl': 'FB分享貼文縮圖網址',
   'copyright': {
     'legalName': '公司正式名稱',
   },
-  'iosAppId': '蘋果APP ID' // 在手機開啟頁面時會出現是否有裝app的banner
+  // 在手機開啟頁面時會出現是否有裝app的banner
+  'iosAppId': '蘋果APP ID'
 }
 ```
 
@@ -112,10 +117,11 @@ export default {
 {
   // SEO必填
   'title': '網頁標題', // 例如： 安裝及使用方式 - Nuxt Head Template
-  'description': '網頁簡介', // 例如：在Nuxt專案下執行npm i nuxt-head-template --save 安裝指令...
+  'description': '網頁簡介', // 例如：在Nuxt專案下執行安裝指令...
   'webPageUrl': '網頁網址',
   // 選填
-  'imageUrl': '網頁縮圖網址', // 有特別行銷需求的網頁可另外指定縮圖，例如：主打商品介紹頁、活動頁...等
+  // 有特別行銷需求的網頁可另外指定縮圖，例如：主打商品介紹頁、活動頁...等
+  'imageUrl': '網頁縮圖網址',
   'fbImageUrl': 'FB分享貼文縮圖網址',
 }
 ```
@@ -144,7 +150,8 @@ export default {
   'telephone': '聯絡電話',
   'email': '聯絡信箱',
   'hoursAvailable': {
-    'days': ['星期幾有開'], // 例如：['Monday','Tuesday','Wednesday']
+    // 必須為英文，例如：['Monday','Tuesday','Wednesday']
+    'days': ['星期幾有開'], 
     'opens': '', // 格式為"時:分:秒"，例如：09:00:00
     'closes': '' // 例如：18:30:00
   }
@@ -173,12 +180,16 @@ export default {
 ```js
 {
   // 必填
-  'pageType': '網頁類型', // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
+  // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
+  'pageType': '網頁類型', 
   // 選填
   'copyright': {
     'name': '公司簡稱',
     'legalName': '公司正式名稱',
     'year': '版權年份' // 數字格式，例如：2020 
   },
+  // 如果網站內有搜尋頁，則可增加搜尋行為網址，例如：https://xxx.com/search?q={search_term_string}
+  // {search_term_string}為Schema指定參數，不可省略，加在搜尋頁網址中顯示"搜尋字串"的位置
+  'searchUrlTemplate': '搜尋頁面網址' 
 }
 ```

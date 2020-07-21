@@ -1,58 +1,39 @@
 const Brand = (data) => {
-  return {
+  const json = {
     '@context': 'http://schema.org',
     '@type': 'Brand',
     'name': data.title,
     'url': data.webPageUrl,
-    'logo': data.logo,
-    'slogan': data.slogan,
     'description': data.description,
-    'image': data.fbImageUrl,
-    'sameAs': data.socialLinks
-  }
+    'image': data.fbImageUrl || data.imageUrl,
+  } 
+  if (data.logo) { json['logo'] = data.logo }
+  if (data.slogan) { json['slogan'] = data.slogan }
+  if (data.socialLinks) { json['sameAs'] =  data.socialLinks }
+  return json
 }
 
 const ContactPoint = (data) => {
-  return {
+  const json = {
     '@context': 'http://schema.org',
     '@type': 'ContactPoint',
-    'telephone': data.telephone,
-    'contactType': data.contactType,
-    'contactOption': 'TollFree',
-    'email': data.email,
-    'hoursAvailable': [
-      {
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/Monday'
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/Tuesday'
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/Wednesday'
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/Thursday'
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/Friday'
-      }
-    ]
+    // 'contactOption': 'TollFree',
+    'hoursAvailable': []
   }
+  if (data.telephone) { json['telephone'] = data.telephone }
+  if (data.contactType) { json['contactType'] = data.contactType }
+  if (data.email) { json['email'] = data.email }
+  if (data.hoursAvailable) {
+    data.hoursAvailable.forEach((item) => {
+      json.itemListElement.push({
+        '@type': 'OpeningHoursSpecification',
+        'opens': data.hoursAvailable.opens,
+        'closes': data.hoursAvailable.closes,
+        'dayOfWeek': 'http://schema.org/' + item
+      })
+    })
+  }
+  return json
 }
 const BreadcrumbList = (data) => {
   const json = {
@@ -75,7 +56,7 @@ const BreadcrumbList = (data) => {
 }
 
 const WebPage = (data) => {
-  return {
+  const json = {
     '@context': 'http://schema.org',
     '@type': data.pageType,
     'name': data.title,
@@ -86,16 +67,41 @@ const WebPage = (data) => {
       '@type': 'WebSite',
       'name': data.title,
       'url': data.webPageUrl,
-      'description': data.description,
-      'sameAs': data.socialLinks,
-      'copyrightHolder': {
-        '@type': 'Organization',
-        'name': data.copyright.name,
-        'legalName': data.copyright.legalName
-      },
-      'copyrightYear': data.copyright.year
+      'description': data.description
     }
   }
+  if (data.copyright) { 
+    json['copyrightHolder'] = {
+      '@type': 'Organization'
+    }
+    if (data.copyright.name) { 
+      json.copyrightHolder['name'] = data.copyright.name
+    }
+    if (data.copyright.legalName) { 
+      json.copyrightHolder['legalName'] = data.copyright.legalName
+    }
+    if (data.copyright.year) { 
+      json.c['copyrightYear'] = data.copyright.year
+    }
+  }
+  if (data.socialLinks) { json.isPartOf['sameAs'] =  data.socialLinks }
+  if (data.searchUrlTemplate) {
+    json.isPartOf['potentialAction'] = [
+      {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": data.searchUrlTemplate
+        },
+        "query-input": {
+          "@type": "PropertyValueSpecification",
+          "valueRequired": "http://schema.org/True",
+          "valueName": "search_term_string"
+        }
+      }
+    ]
+  }
+  return json
 }
 
 const templateArray = {
