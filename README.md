@@ -88,17 +88,17 @@ export default {
 
 ## 各模板需填寫的資料格式
 
-### Mate模板 - 全站頁面預設共用資料（必填）
-
+### Mate模板
+- 全站頁面預設共用資料（必填）
 ```js
 {
-  // SEO必填
+  // ===== SEO必填 =====
   'webSiteTitle': '網站標題', // 例如：Nuxt Head Template
   'webSiteDescription': '網站簡介', // 例如：依賴Nuxt的Head模板
   'webSiteUrl': '網站首頁網址',
   // 當此頁面分享到社群平台或通訊軟體時，出現的縮圖(尺寸:1200x630)
   'imageUrl': '網站縮圖網址',
-  // 選填
+  // ===== 選填 =====
   'locale': '當地語言', // 例如：zh-TW
   'fbAppId': 'Facebook應用程式ID',
   'copyright': {
@@ -109,26 +109,26 @@ export default {
 }
 ```
 
-### Mate模板 - 個別頁面資料
+- 個別頁面資料
 
 ```js
 {
-  // SEO必填
+  // ===== SEO必填 =====
   'title': '網頁標題', // 例如： 安裝及使用方式 - Nuxt Head Template
   'description': '網頁簡介', // 例如：在Nuxt專案下執行安裝指令...
   'webPageUrl': '網頁網址',
-  // 選填
+  // ===== 選填 =====
   // 有特別行銷需求的網頁可另外指定縮圖，例如：主打商品介紹頁、活動頁...等
   'imageUrl': '網頁縮圖網址'
 }
 ```
-
-### Json-ld模板 - [Brand 品牌](https://schema.org/Brand)
+[查看模板輸出結果](https://github.com/Tr-blank/nuxt-head-template/tree/master/template)
+### Json-ld模板 
+- [Brand 品牌](https://schema.org/Brand)
 ```js
 {
-  // SEO必填
+  // ===== 選填 =====
   'logo': '網站logo網址',
-  // 選填
   'slogan': '品牌標語',
   'socialLinks': [
     '品牌相關社群網址:FB粉絲團',
@@ -138,27 +138,26 @@ export default {
 }
 ```
 
-
-### Json-ld模板 - [ContactPoint 聯絡資訊](https://schema.org/ContactPoint)
+- [ContactPoint 聯絡資訊](https://schema.org/ContactPoint)
 ```js
 {
-  // 選填
+  // ===== 選填 =====
   'contactType': '提供的服務種類', // 例如：客服、異業合作
   'telephone': '聯絡電話',
   'email': '聯絡信箱',
   'hoursAvailable': {
     // 必須為英文，例如：['Monday','Tuesday','Wednesday']
     'days': ['星期幾有開'], 
-    'opens': '', // 格式為"時:分:秒"，例如：09:00:00
-    'closes': '' // 例如：18:30:00
+    'opens': '服務開始時間', // 格式為"時:分:秒"，例如：09:00:00
+    'closes': '服務關閉時間' // 例如：18:30:00
   }
 }
 ```
 
-### Json-ld模板 - [BreadcrumbList 麵包屑(網頁目錄)](https://schema.org/BreadcrumbList)
+- [BreadcrumbList 麵包屑(網頁目錄)](https://schema.org/BreadcrumbList)
 ```js
 {
-  // 必填
+  // ===== 必填 =====
   'breadcrumbList': [
     {
       'name': '第一層目錄名稱',
@@ -172,14 +171,14 @@ export default {
   ],
 }
 ```
-
-### Json-ld模板 - [WebPage 網頁（可指定更具體的網頁類型）](https://schema.org/WebPage)
+ 
+- [WebPage 網頁（可指定更具體的網頁類型）](https://schema.org/WebPage)
 ```js
 {
-  // 必填
+  // ===== 必填 =====
   // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
   'pageType': '網頁類型',
-  // 選填
+  // ===== 選填 =====
   'copyright': {
     'name': '公司簡稱',
     'legalName': '公司正式名稱',
@@ -190,3 +189,4 @@ export default {
   'searchUrlTemplate': '搜尋頁面網址' 
 }
 ```
+[查看模板輸出結果](https://github.com/Tr-blank/nuxt-head-template/tree/master/template)

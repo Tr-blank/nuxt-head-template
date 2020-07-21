@@ -29,7 +29,6 @@ const defaultMeta = (data) => {
   }
   if (data.fbAppId) { json.meta.push({ property: 'fb:app_id', content: data.fbAppId }) }
   if (data.locale) { json.meta.push({ property: 'og:locale', content: data.locale }) }
-  if (data.iosAppId) { json.meta.push({ name: 'google-play-app', content: 'app-id=' + data.iosAppId }) }
   if (data.copyright && (data.copyright.name || data.copyright.legalName)) {
     json.meta.push({ name: 'copyright', content: data.copyright.legalName || data.copyright.name })
   } 

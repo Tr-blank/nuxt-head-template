@@ -17,16 +17,18 @@
 <meta property="og:site_name" content="{{ title }}" />
 <meta property="og:locale" content="{{ locale }}" />
 <!--Open Graph data image -->
-<meta property="og:image" content="{{ seoData.imageUrl }}" />
+<meta property="og:image" content="{{ imageUrl }}" />
 <meta property="og:image:alt" content="{{ title }}" />
-<meta property="og:image:secure_url" content="{{ seoData.imageUrl }}" />
+<meta property="og:image:secure_url" content="{{ imageUrl }}" />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <!-- Mobile Safari 特有 Tags -->
 <!-- apple手機瀏覽時不要自動為電話、信箱、地址加上撥號連結、發送信件、開啟地圖 -->
 <meta name="format-detection" content="telephone=no,email=no,adress=no">
-
+<!-- 在手機開啟頁面時會出現是否有裝app的banner  -->
+<meta name="Apple-tunes-app" content="app-id={{ iosAppId }}">
+<meta name="google-play-app" content="app-id={{ iosAppId }}">
 <link rel="icon" href="/favicon.ico" sizes="16x16" type="image/png">
 ```
 - ## Branch
