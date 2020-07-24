@@ -116,4 +116,4 @@ const jsonLd = (typeArray, data) => {
   return schema
 }
 
-export default jsonLd
+module.exports = jsonLd

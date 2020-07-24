@@ -1,7 +1,7 @@
-const { defaultMeta, pageMeta } = require('./src/template/meta')
-const jsonLd = require('./src/template/jsonld')
+const { defaultMeta, pageMeta } = require('./template/meta')
+const jsonLd = require('./template/jsonld')
 
-export default {
+module.exports = {
   defaultMeta,
   pageMeta,
   jsonLd
