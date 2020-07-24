@@ -1,39 +1,36 @@
 const Brand = (data) => {
-  const json = {
+  return {
     '@context': 'http://schema.org',
     '@type': 'Brand',
     'name': data.webSiteTitle,
     'url': data.webSiteUrl,
     'description': data.webSitedescription,
     'image': data.imageUrl,
+    ...data.logo ? {'logo': data.logo} : {},
+    ...data.lslogan ? {'lslogan': data.lslogan} : {},
+    ...data.sameAs ? {'sameAs': data.sameAs} : {}
   } 
-  if (data.logo) { json['logo'] = data.logo }
-  if (data.slogan) { json['slogan'] = data.slogan }
-  if (data.socialLinks) { json['sameAs'] =  data.socialLinks }
-  return json
 }
 
 const ContactPoint = (data) => {
-  const json = {
+  return {
     '@context': 'http://schema.org',
     '@type': 'ContactPoint',
     // 'contactOption': 'TollFree',
-    'hoursAvailable': []
-  }
-  if (data.telephone) { json['telephone'] = data.telephone }
-  if (data.contactType) { json['contactType'] = data.contactType }
-  if (data.email) { json['email'] = data.email }
-  if (data.hoursAvailable) {
-    data.hoursAvailable.days.forEach((item) => {
-      json.hoursAvailable.push({
-        '@type': 'OpeningHoursSpecification',
-        'opens': data.hoursAvailable.opens,
-        'closes': data.hoursAvailable.closes,
-        'dayOfWeek': 'http://schema.org/' + item
+    ...data.telephone ? {'telephone': data.telephone} : {},
+    ...data.contactType ? {'contactType': data.contactType} : {},
+    ...data.email ? {'email': data.email} : {},
+    ...data.hoursAvailable ? {
+      'hoursAvailable': data.hoursAvailable.days.map((item) => {
+        return {
+          '@type': 'OpeningHoursSpecification',
+          'opens': data.hoursAvailable.opens,
+          'closes': data.hoursAvailable.closes,
+          'dayOfWeek': 'http://schema.org/' + item
+        }
       })
-    })
+    } : {}
   }
-  return json
 }
 const BreadcrumbList = (data) => {
   const json = {
@@ -56,7 +53,7 @@ const BreadcrumbList = (data) => {
 }
 
 const WebPage = (data) => {
-  const json = {
+  return {
     '@context': 'http://schema.org',
     '@type': data.pageType,
     'name': data.title,
@@ -68,43 +65,36 @@ const WebPage = (data) => {
       'name': data.webSiteTitle,
       'url': data.webSiteUrl,
       'description': data.webSitedescription,
-    }
-  }
-  if (data.copyright) { 
-    json['copyrightHolder'] = {
-      '@type': 'Organization'
-    }
-    if (data.copyright.name) { 
-      json.copyrightHolder['name'] = data.copyright.name
-    }
-    if (data.copyright.legalName) { 
-      json.copyrightHolder['legalName'] = data.copyright.legalName
-    }
-    if (data.copyright.year) { 
-      json['copyrightYear'] = data.copyright.year
-    }
-  }
-  if (data.socialLinks) { json.isPartOf['sameAs'] =  data.socialLinks }
-  if (data.searchUrlTemplate) {
-    json.isPartOf['potentialAction'] = [
-      {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": data.searchUrlTemplate
-        },
-        "query-input": {
-          "@type": "PropertyValueSpecification",
-          "valueRequired": "http://schema.org/True",
-          "valueName": "search_term_string"
-        }
+    },
+    ...data.socialLinks ? {'sameAs': data.socialLinks} : {},
+    ...data.copyright ? {'copyrightHolder': {
+      '@type': 'Organization',
+      ...data.copyright.name ? {'name': data.copyright.name} : {},
+      ...data.copyright.legalName ? {'legalName': data.copyright.legalName} : {},
+      ...data.copyright.year ? {'name': data.copyright.year} : {}
+    }} : {},
+    ...data.searchUrlTemplate ? {
+      'isPartOf': {
+        'potentialAction': [
+          {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": data.searchUrlTemplate
+            },
+            "query-input": {
+              "@type": "PropertyValueSpecification",
+              "valueRequired": "http://schema.org/True",
+              "valueName": "search_term_string"
+            }
+          }
+        ]
       }
-    ]
+    } : {},
   }
-  return json
 }
 
-const templateArray = {
+const templateList = {
   Brand,
   ContactPoint,
   BreadcrumbList,
@@ -121,9 +111,9 @@ const jsonLd = (typeArray, data) => {
     ]
   }
   typeArray.forEach((item) => {
-    schema.script[0].json.push(templateArray[item](data))
+    schema.script[0].json.push(templateList[item](data))
   })
   return schema
 }
 
-module.exports = jsonLd
+export default jsonLd

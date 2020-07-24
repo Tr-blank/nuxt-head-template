@@ -50,7 +50,7 @@ const pageMeta = (data) => {
   }
 }
 
-module.exports = {
+export default {
   defaultMeta,
   pageMeta
 }
