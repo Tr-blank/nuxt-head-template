@@ -33,23 +33,21 @@ const ContactPoint = (data) => {
   }
 }
 const BreadcrumbList = (data) => {
-  const json = {
+  return {
     '@context': 'http://schema.org',
     '@type': 'BreadcrumbList',
-    'itemListElement': []
-  }
-  data.breadcrumbList.forEach((item, index) => {
-    json.itemListElement.push({
-      '@type': 'ListItem',
-      'position': index,
-      'item': {
-        '@type': 'Thing',
-        '@id': item.link,
-        'name': item.name
+    'itemListElement': data.breadcrumbList.map((item, index) => {
+      return {
+        '@type': 'ListItem',
+        'position': index,
+        'item': {
+          '@type': 'Thing',
+          '@id': item.link,
+          'name': item.name
+        }
       }
     })
-  })
-  return json
+  }
 }
 
 const WebPage = (data) => {
@@ -102,18 +100,16 @@ const templateList = {
 }
 
 const jsonLd = (typeArray, data) => {
-  const schema = {
+  return {
     script: [
       {
         type: 'application/ld+json',
-        json: []
+        json: typeArray.map((item) => {
+          return templateList[item](data)
+        })
       }
     ]
   }
-  typeArray.forEach((item) => {
-    schema.script[0].json.push(templateList[item](data))
-  })
-  return schema
 }
 
 module.exports = jsonLd

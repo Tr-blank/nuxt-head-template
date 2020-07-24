@@ -1,5 +1,5 @@
 const defaultMeta = (data) => {
-  const json = {
+  return {
     title: data.webSiteTitle,
     meta: [
       { charset: 'utf-8' },
@@ -17,22 +17,19 @@ const defaultMeta = (data) => {
       { property: 'og:image:alt', hid: 'og:image', content: data.webSiteTitle },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
-      { name: 'format-detection', content: 'telephone=no,email=no,adress=no' }
+      { name: 'format-detection', content: 'telephone=no,email=no,adress=no' },
+      ...data.fbAppId ? [{ property: 'fb:app_id', content: data.fbAppId }] : [],
+      ...data.locale ? [{ property: 'og:locale', content: data.locale }] : [],
+      ...data.copyright && (data.copyright.name || data.copyright.legalName) ? [{ name: 'copyright', content: data.copyright.legalName || data.copyright.name }] : [],
+      ...data.iosAppId ? [
+        { name: 'google-play-app', content: 'app-id=' + data.iosAppId },
+        { name: 'apple-itunes-app', content: 'app-id=' + data.iosAppId }
+      ] : []
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   }
-  if (data.iosAppId) {
-    json.meta.push({ name: 'google-play-app', content: 'app-id=' + data.iosAppId })
-    json.meta.push({ name: 'apple-itunes-app', content: 'app-id=' + data.iosAppId })
-  }
-  if (data.fbAppId) { json.meta.push({ property: 'fb:app_id', content: data.fbAppId }) }
-  if (data.locale) { json.meta.push({ property: 'og:locale', content: data.locale }) }
-  if (data.copyright && (data.copyright.name || data.copyright.legalName)) {
-    json.meta.push({ name: 'copyright', content: data.copyright.legalName || data.copyright.name })
-  } 
-  return json
 }
 
 const pageMeta = (data) => {
