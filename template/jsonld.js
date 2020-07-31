@@ -39,7 +39,7 @@ const Organization = (data) => {
     '@type': 'Organization',
     'name': data.organization.name,
     'url': data.organization.url,
-    ...data.organization.legalName ? {'telephone': data.organization.legalName} : {},
+    ...data.organization.legalName ? {'legalName': data.organization.legalName} : {},
     ...data.organization.telephone ? {'telephone': data.organization.telephone} : {},
     ...data.organization.email ? {'email': data.organization.email} : {},
     ... data.organization.brand ? {

@@ -81,7 +81,7 @@ export default {
 
 
 
-## 各模板需填寫的資料格式
+## 各模板需填寫資料
 
 ### Mate模板
 - 全站頁面預設共用資料（必填）
@@ -122,21 +122,39 @@ export default {
 - [Brand 品牌](https://schema.org/Brand)
 ```js
 {
-  // ===== 選填 =====
+  // ===== 選填資料 =====
   'logo': '網站logo網址',
   'slogan': '品牌標語',
   'socialLinks': [
-    '品牌相關社群網址:FB粉絲團',
-    '品牌相關社群網址:youtube頻道',
+    '相關社群網址:FB粉絲團',
+    '相關社群網址:youtube頻道',
     ...
   ] 
 }
 ```
-
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Brand",
+    "name": "網站標題",
+    "description": "網站簡介",
+    "url": "網站首頁網址",
+    "logo": "網站logo網址",
+    "slogan": "品牌標語",
+    "image": "網站縮圖網址",
+    "sameAs": [
+      "相關社群網址:FB粉絲團",
+      "相關社群網址:youtube頻道"
+    ] 
+  }
+</script>
+```
 - [ContactPoint 聯絡資訊](https://schema.org/ContactPoint)
 ```js
 {
-  // ===== 選填 =====
+  // ===== 選填資料 =====
   'contactType': '提供的服務種類', // 例如：客服、異業合作
   'telephone': '聯絡電話',
   'email': '聯絡信箱',
@@ -148,10 +166,36 @@ export default {
   }
 }
 ```
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "ContactPoint",
+    "telephone": "聯絡電話",
+    "contactType": "客服、異業合作",
+    "email": "聯絡信箱",
+    "hoursAvailable": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "opens": "09:00:00",
+        "closes": "18:30:00",
+        "dayOfWeek": "http://schema.org/Monday"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "opens": "09:00:00",
+        "closes": "18:30:00",
+        "dayOfWeek": "http://schema.org/Tuesday"
+      }
+    ]
+  }
+</script>
+```
 - [Organization 公司廠商](https://schema.org/Organization)
 ```js
 {
-  // ===== 選填 =====
+  // ===== 選填資料 =====
   'organization': {
     'name': '公司廠商名稱',
     'url': '公司廠商官網',
@@ -165,11 +209,29 @@ export default {
   }
 }
 ```
-
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "公司廠商名稱",
+    "url": "公司廠商官網",
+    "legalName": "公司廠商正式名稱",
+    "telephone": "公司廠商聯絡電話",
+    "email": "公司廠商聯絡信箱",
+    "brand": {
+      "@type": "Brand",
+      "name": "'公司廠商旗下品牌名稱'",
+      "url": "公司廠商旗下品牌名稱"
+    }
+  }
+</script>
+```
 - [BreadcrumbList 麵包屑(網頁目錄)](https://schema.org/BreadcrumbList)
 ```js
 {
-  // ===== 必填 =====
+  // ===== 必填資料 =====
   'breadcrumbList': [
     {
       'name': '第一層目錄名稱',
@@ -183,14 +245,42 @@ export default {
   ],
 }
 ```
- 
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 0,
+        "item": {
+          "@type": "Thing",
+          "@id": "第一層目錄連結網址",
+          "name": "第一層目錄名稱"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position":1,
+        "item":{
+          "@type": "Thing",
+          "@id": "第二層目錄連結網址",
+          "name": "第二層目錄名稱"
+        }
+      }
+    ]
+  }
+</script>
+```
 - [WebPage 網頁（可指定更具體的網頁類型）](https://schema.org/WebPage)
 ```js
 {
-  // ===== 必填 =====
+  // ===== 必填資料 =====
   // 填入Schema支援的特定網頁類型，例如：AboutPage、CollectionPage、ItemPage...等
   'pageType': '網頁類型',
-  // ===== 選填 =====
+  // ===== 選填資料 =====
   'copyright': {
     'name': '公司簡稱',
     'legalName': '公司正式名稱',
@@ -201,41 +291,157 @@ export default {
   'searchUrlTemplate': '搜尋頁面網址' 
 }
 ```
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "ItemPage",
+    "name": "網頁標題",
+    "description": "網站簡介",
+    "url": "網頁網址",
+    "image": "網頁縮圖網址",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "網站標題",
+      "url": "網站首頁網址",
+      "description": "網站簡介",
+      "sameAs": [
+        "相關社群網址:FB粉絲團",
+        "相關社群網址:youtube頻道"
+      ],
+      "copyrightHolder": {
+        "@type": "Organization",
+        "name": "公司簡稱",
+        "legalName": "公司正式名稱"
+      },
+      "copyrightYear": 2020,
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://xxx.com/search?q={search_term_string}"
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            "valueRequired": "http://schema.org/True",
+            "valueName": "search_term_string"
+          }
+        }
+      ]
+    }
+  }
+</script>
+```
 - [Product 商品](https://schema.org/Product)
 ```js
 {
   'product': {
     'name': '商品名稱',
     'description': '商品簡介',
-    'sku': '商品庫存數',
+    'sku': '商品庫存數', // 例如：10
+    "mpn": '商品條碼', // 例如：15615
     'id': '商品ID',
     'category': '商品所屬分類',
     'weight': '商品重量',
     'material': '商品成分',
   },
-  'bestRating': '最高評分',
-  'worstRating': '最低評分',
+  'bestRating': '最高評分', // 例如：5
+  'worstRating': '最低評分', // 例如：1
   'review': [
     {
       'title': '評論標題',
-      'ratingValue': '評分',
+      'ratingValue': '評分', // 例如：4.5
       'author': '評論人名字',
       'datePublished': '評論日期',
       'reviewBody': '評論內容',
     }
   ],
   'aggregateRating' : {
-    'ratingValue': '平均評價星數',
+    'ratingValue': '平均評價星數', // 例如：4
     'reviewCount': '商品評論數量'
   },
   'offers': {
     'priceCurrency': '商品幣別',
-    'price': '商品價格',
-    'priceValidUntil': '價格有效日期'
+    'price': '商品價格', // 例如：1000
+    'priceValidUntil': '價格有效日期' // 例如：2020-08-01
     'availability': '商品狀態（填英文）'
     // 現貨InStock、售完SoldOut、缺貨OutOfStock、預購PreOrder
+  },
+  'manufacturer': {
+    "name": "供應商名稱",
+    "description": "供應商簡介"
   }
 }
+```
+```html
+<!-- 輸出結果 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "商品名稱",
+  "url": "網頁網址",
+  "description": "商品簡介",
+  "sku": "商品庫存數",
+  "productID": "商品ID",
+  "mpn": 15615,
+  "category": "商品所屬分類",
+  "weight": "商品重量",
+  "material": "商品成分",
+  "image": "網頁縮圖網址",
+  "brand": {
+    "@type": "Brand",
+    "name": "網站標題",
+    "description": "網站簡介",
+    "url": "網站首頁網址",
+    "logo": "網站logo網址",
+    "slogan": "品牌標語",
+    "image": "網站縮圖網址",
+    "sameAs": [
+      "相關社群網址:FB粉絲團",
+      "相關社群網址:youtube頻道"
+    ] 
+  },
+  "review": {
+    "@type": "Review",
+    "name": "評論標題",
+    "reviewRating": {
+      "@type": "Rating",
+      "bestRating": "5",
+      "ratingValue": "4.5",
+      "worstRating": "1"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "評論人名字"
+    },
+    "datePublished": "評論日期",
+    "reviewBody": "評論內容"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4",
+    "reviewCount": 10,
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "網頁網址",
+    "priceCurrency": "商品幣別",
+    "price": 1000,
+    "priceValidUntil": "2020-08-01",
+    "availability": "https://schema.org/InStock"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "供應商名稱",
+    "description": "供應商簡介"
+  }
+}
+</script>
 ```
 
 [查看模板輸出結果](https://github.com/Tr-blank/nuxt-head-template/tree/master/template)
