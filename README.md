@@ -16,7 +16,7 @@ npm i nuxt-head-template --save
 const { meta, jsonLd } = require('head_template')
 
 // 設定網頁基本資訊
-const websiteData = {
+const websiteInfo = {
   title: '網站標題',
   description: '網站簡介'
   ...
