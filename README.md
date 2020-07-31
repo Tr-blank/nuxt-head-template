@@ -12,7 +12,8 @@ npm i nuxt-head-template --save
 ```js
 // plugins/head.js
 
-const { defaultMeta, pageMeta, jsonLd } = require('nuxt-head-template')
+// 載入模板
+const { meta, jsonLd } = require('head_template')
 
 // 設定網頁基本資訊
 const websiteData = {
@@ -21,29 +22,23 @@ const websiteData = {
   ...
 }
 
-// 將 網站資訊 跟Mate基本模板和指定的schema Type模板結合
-const defaultHead = () => {
-  const typeArray = ['Brand', 'ContactPoint'] // 指定全站共用的json-ld模板
-  return {
-    ...defaultMeta(websiteData),
-    ...jsonLd(typeArray, websiteData)
-  }
+// 建立在nuxt.config使用的head function
+const websiteHead = {
+  ...meta.website(websiteInfo),
+  ...jsonLd(websiteInfo.jsonLdType, websiteInfo)
 }
 
-// 將 各個頁面資料 跟Mate頁面模板和指定的schema Type模板結合
+// 建立在頁面組件使用的head function
 const pageHead = (typeArray, pageData) => {
-  const data = {
-    ...websiteData,
-    ...pageData
-  }
+  const data = { ...websiteInfo, ...pageData }
   return {
-    ...pageMeta(data),
+    ...meta.page(data),
     ...jsonLd(typeArray, data)
   }
 }
 
 module.exports = {
-  defaultHead,
+  websiteHead,
   pageHead
 }
 
@@ -52,11 +47,11 @@ module.exports = {
 ### 2. 將head object加到Nuxt設定檔裡
 ```js
 // nuxt.config.js
-const { defaultHead } = require('./plugins/head')
+const { websiteHead } = require('./plugins/head')
 
 module.exports = {
   head: {
-    ...defaultHead()
+    ...websiteHead
   }
 }
 ```
@@ -153,6 +148,23 @@ export default {
   }
 }
 ```
+- [Organization 公司廠商](https://schema.org/Organization)
+```js
+{
+  // ===== 選填 =====
+  'organization': {
+    'name': '公司廠商名稱',
+    'url': '公司廠商官網',
+    'legalName': '公司廠商正式名稱',
+    'telephone': '公司廠商聯絡電話',
+    'email': '公司廠商聯絡信箱',
+    'brand': {
+      'name': '公司廠商旗下品牌名稱',
+      'url': '公司廠商旗下品牌名稱'
+    }
+  }
+}
+```
 
 - [BreadcrumbList 麵包屑(網頁目錄)](https://schema.org/BreadcrumbList)
 ```js
@@ -189,4 +201,41 @@ export default {
   'searchUrlTemplate': '搜尋頁面網址' 
 }
 ```
+- [Product 商品](https://schema.org/Product)
+```js
+{
+  'product': {
+    'name': '商品名稱',
+    'description': '商品簡介',
+    'sku': '商品庫存數',
+    'id': '商品ID',
+    'category': '商品所屬分類',
+    'weight': '商品重量',
+    'material': '商品成分',
+  },
+  'bestRating': '最高評分',
+  'worstRating': '最低評分',
+  'review': [
+    {
+      'title': '評論標題',
+      'ratingValue': '評分',
+      'author': '評論人名字',
+      'datePublished': '評論日期',
+      'reviewBody': '評論內容',
+    }
+  ],
+  'aggregateRating' : {
+    'ratingValue': '平均評價星數',
+    'reviewCount': '商品評論數量'
+  },
+  'offers': {
+    'priceCurrency': '商品幣別',
+    'price': '商品價格',
+    'priceValidUntil': '價格有效日期'
+    'availability': '商品狀態（填英文）'
+    // 現貨InStock、售完SoldOut、缺貨OutOfStock、預購PreOrder
+  }
+}
+```
+
 [查看模板輸出結果](https://github.com/Tr-blank/nuxt-head-template/tree/master/template)
